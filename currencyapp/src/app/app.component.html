@@ -1,0 +1,38 @@
+<header>
+  <div class="app-title">
+    {{ title }}
+  </div>
+  <ul class="app-nav">
+    <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+    <li><a routerLink="/about" routerLinkActive="active">About</a></li>
+    <li class="app-user">
+      <span *ngIf="savedName">
+        Welcome, {{savedName}}!
+      </span>
+      
+      <span *ngIf="!savedName">
+        Welcome, User!
+      </span>
+    </li>
+  </ul>
+</header>
+
+
+
+
+<!-- Where router should display a view -->
+<router-outlet></router-outlet>
+
+
+<footer class="app-footer">
+  <ul class="app-nav">
+      <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
+      <li><a routerLink="/about" routerLinkActive="active">About</a></li>
+      <li class="app-user">
+        <div>
+            API by <a href="https://www.cryptocompare.com/api">CryptoCompare API</a>
+        </div>
+      </li>
+    </ul>
+</footer>
+

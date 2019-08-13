@@ -1,0 +1,19 @@
+<div class="app-home">
+    <div class="wrapper">
+        <ul>
+            <li *ngFor="let crcy of currencyArray">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><a routerLink="/detail/{{crcy.symbol | lowercase }}" routerLinkActive="active">{{crcy.name}}</a></td>
+                            <td class="text-center bold">{{ crcy.symbol }}</td>
+                            <td>&nbsp;</td>
+                            <td>{{ crcy.price | currency }} USD</td>
+                            <td class="text-center"><app-arrow [arrowSwitch]="arrowChange"></app-arrow></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </li>
+        </ul>
+    </div>
+</div>

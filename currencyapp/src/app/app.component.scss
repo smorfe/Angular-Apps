@@ -1,0 +1,138 @@
+header, footer {
+    background-color: orange;
+    padding: 15px;
+}
+
+.wrapper {
+    display: block;
+    max-width: 75%;
+    margin: 50px auto;
+}
+
+.crypto-img {
+    max-width: 55px;
+}
+
+table {
+    border-collapse: collapse;
+
+    td {
+        border: 1px solid;
+        width: 25%;
+        padding: 10px;
+    }
+
+    .bold {
+        font-weight: bold;
+    }
+}
+
+.app-title {
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.app-nav {
+
+    li {
+        display: inline-block;
+
+        + li > a {
+            border-left: 1px solid white;
+        }
+
+        a {
+            padding: 0 15px;
+            text-decoration: none;
+            color: white;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+    }
+
+    
+
+    .app-user {
+        float: right;
+        font-weight: bold;
+
+        a {
+            padding: 0;
+        }
+    }
+}
+
+.app-home {
+    table {
+        margin: 10px 0;
+    }
+
+    td {
+        border: none;
+        border-bottom: 1px solid black;
+
+        a {
+            font-weight: bold;
+            color: orange;
+        }
+    }
+
+    .bold {
+        font-weight: bold;
+    }
+}
+
+.text-center {
+    text-align: center;
+}
+
+.user-heading {
+    background-color: grey;
+    color: white;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+.name-input-wrapper {
+    padding: 20px;
+    border: 1px solid lightgrey;
+    display: block;
+
+    input {
+        width: 80%;
+        padding: 10px;
+        border: 1px solid lightgrey;
+        margin-right: -1px;
+        outline: none;
+    }
+
+    button {
+        width: 15%;
+        padding: 10px;
+        background: orange;
+        border: 1px solid orange;
+        font-weight: bold;
+        transition: all 250ms;
+        outline: none;
+
+        &:hover {
+            border-color: #f38c0d;
+            background-color: #f38c0d;
+        }
+    }
+}
+
+.error-msg {
+    color: red;
+    padding: 10px 0 0;
+    font-size: 14px;
+    font-weight: bold;
+}

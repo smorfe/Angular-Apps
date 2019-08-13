@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      News
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card margin-bottom *ngFor="let item of newsItems; let i = index">
+    <ion-img src="{{ item.img }}"></ion-img>
+    <ion-card-header>
+      <ion-card-subtitle>Source: {{ item.sourceName }}</ion-card-subtitle>
+      <ion-card-title>{{ item.title }}</ion-card-title>
+      <ion-button fill="outline" slot="end">View</ion-button>
+    </ion-card-header>
+  
+    <ion-card-content>
+        {{ item.description }}
+    </ion-card-content>
+
+    <ion-button 
+      margin
+      expand="full"
+      href="/tabs/detail/{{ i }}"
+    >View Article</ion-button>
+  </ion-card>
+
+</ion-content>

@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      To Do List
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding-vertical>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-item no-padding>
+    <ion-toolbar>
+      <ion-segment [(ngModel)]="filter">
+        <ion-segment-button value="all" checked>
+          All Tasks
+        </ion-segment-button>
+        <ion-segment-button value="completed">
+          Completed Tasks
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar> 
+  </ion-item>
+  
+  <div [ngSwitch]="filter">
+    <ion-item *ngSwitchCase="'all'">
+      <ion-icon name="add-circle-outline"></ion-icon>
+      <ion-input 
+        margin-horizontal 
+        type="text" 
+        [ngModel]="addTodo"
+        [(ngModel)]="addTodo"
+        placeholder="What's your task for today?"
+        (keydown)="enterToDo($event)"></ion-input>
+    </ion-item>
+    <ion-list *ngSwitchCase="'all'" class="all-items">
+      <ion-reorder-group (ionItemReorder)="onRenderItems($event)" disabled="false">
+        <ion-item *ngFor="let todo of storedToDo; let i = index" no-padding>
+          <ion-reorder>
+            <ion-icon name="menu" class="reorder-icon" no-padding></ion-icon>
+          </ion-reorder>
+
+          <ion-button fill="clear" (click)="removeToDo(i)" class="remove-icon">
+            <ion-icon name="close"></ion-icon>
+          </ion-button>
+          
+          <ion-label [ngClass]="{'completed-todo': id === i}" id="{{ i }}">{{ todo.text }}</ion-label>
+          <ion-button fill="clear">
+              <ion-checkbox [(ngModel)]="todo.isCompleted" (ionChange)="completeToDo(i)"></ion-checkbox>
+          </ion-button>    
+        </ion-item>
+      </ion-reorder-group>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'completed'">
+      <ion-item *ngFor="let todo of completedToDo; let i = index">
+        <ion-text class="completed-todo" no-padding>{{ todo.text }}</ion-text>
+        <ion-button fill="solid" color="danger" (click)="removeCompleted(i)" slot="end">
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <ion-item *ngIf="completedToDo.length === 0">
+        <ion-text color="">Seems like you're not busy today. You don't have completed task, yet.</ion-text>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

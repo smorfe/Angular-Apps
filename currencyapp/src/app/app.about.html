@@ -1,0 +1,38 @@
+<div class="about-wrapper">
+    <div class="wrapper">
+        <div class="user-heading">
+            Hello!
+    
+            <span *ngIf="showName">
+                My name is {{ showName }}!
+            </span>
+    
+            <span *ngIf="!showName">
+                What's your name?
+            </span>
+    
+        </div>
+    
+        <div class="name-input-wrapper">
+            <input type="text"  
+            [(ngModel)]="nameInput"
+            pattern="[A-Za-z ]+"
+            minlength="2"
+            placeholder="Enter your name"
+            [ngModel]="username"
+            #username="ngModel">
+    
+            <button (click)="nameEntered(nameInput)">Submit</button>
+    
+    
+    
+            <div class="error-msg" *ngIf="username.errors?.minlength">
+                Name must be atleast 2 characters long.
+            </div>
+    
+            <div class="error-msg" [hidden]="username.valid">
+                Name must be alphabetical.
+            </div>
+        </div>
+    </div>
+</div>

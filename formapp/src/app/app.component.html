@@ -1,0 +1,166 @@
+<div class="page-section form-wrapper">
+  <div class="form-heading">
+    <h2>{{ formHeading }}</h2>
+  </div>
+
+  <div class="form-body">
+      <form #myForm="ngForm" autocomplete="off">
+        <h2>Personal Information</h2>
+        <div class="field-wrapper first-name-wrapper">
+            <input type="text"
+              pattern="[A-Za-z-']+"
+              [(ngModel)]="firstNameInput"
+              name="firstName"
+              id="firstName"
+              #firstName="ngModel"
+            >
+            <label for="firstName">First Name</label>
+
+            <div [hidden]="firstName.valid" class="error-msg">
+                First Name must contain letters, hypens and apostrophes.
+            </div>
+
+            <div *ngIf="formSubmitted && !showFirstName" class="error-msg">
+                Please enter your first name.
+            </div>
+        </div>
+
+        <div class="field-wrapper last-name-wrapper">
+            <input type="text"
+                pattern="[A-Za-z-']+"
+                [(ngModel)]="lastNameInput"
+                name="lastName"
+                id="lastName"
+                #lastName="ngModel"
+            >
+            <label for="lastName">Last Name</label>
+
+            <div [hidden]="lastName.valid" class="error-msg">
+                Last Name must contain letters, hypens and apostrophes.
+            </div>
+
+            <div *ngIf="formSubmitted && !showLastName" class="error-msg">
+                Please enter your last name.
+            </div>
+        </div>
+
+        <div class="field-wrapper street-address-wrapper">
+            <input type="text" 
+                [(ngModel)]="streetAddressInput"
+                name="streetAddress"
+                id="streetAddress"
+                #streetAddress="ngModel"
+            >
+            <label for="streetAddres">Street Address</label>
+
+            <div *ngIf="formSubmitted && !showStreetAddress" class="error-msg">
+                Please enter your street address.
+            </div>
+        </div>
+
+        <button type="submit" class="button"
+            (click)=onSubmit()>
+            Submit Address
+        </button>
+      </form>
+
+
+      <form class="products-wrapper" #productForm="ngForm">
+        <h2>Product to Order</h2>
+        <div class="field-wrapper product-lists">
+            <label for="productSelection">Select a Product</label>
+            <select name="productSelection"
+                [(ngModel)]="productInput"
+                #productSelection="ngModel"
+            >
+                <option value=""></option>
+                <option 
+                    *ngFor="let product of products; let i = index" 
+                    value="{{ i }}"
+                >
+                    {{ product.name }}
+                </option>
+            </select>
+        </div>
+
+        <div class="field-wrapper product-quantity-input">
+            <label for="qty">Quantity</label>
+            <input type="number"
+                [(ngModel)]="qtyInput"
+                name="qty"
+                id="qty"
+                #qty="ngModel"
+            >
+        </div>
+
+        <button type="submit" class="button"
+            (click)=addItems()>
+            Add Item
+        </button>
+
+        <div class="error-msg" *ngIf="productValidation && (!productInput || !qtyInput)">
+            <div *ngIf="productValidation && !productInput">
+                Please select a product.
+            </div>
+    
+            <div *ngIf="productValidation && !qtyInput">
+                Quantity is required. Must be more than 0.
+            </div>
+        </div>
+    </form>
+  </div>
+
+  
+
+  <div class="order-lists" *ngIf="items?.length > 0">
+      <h3>Order Summary</h3>
+      <table class="product-item">
+        <tr>
+            <th>&nbsp;</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Amount</th>
+            <th>&nbsp;</th>
+        </tr>
+
+        <tr *ngFor="let item of items; let i = index" id="{{ i }}">
+            <td>{{ item.name }}</td>
+            <td>{{ item.qty }}</td>
+            <td>${{ item.price.toFixed(2) }}</td>
+            <td>${{ item.subTotal.toFixed(2) }}</td>
+            <td><button type="button" (click)="removeItem(item.id)">Delete</button></td>
+        </tr>
+
+        <tr>
+            <td class="text-right text-bold">Subtotal</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td class="text-bold">${{ subtotalVal.toFixed(2) }}</td>
+        </tr>
+
+        <tr>
+            <td class="text-right text-bold">Taxes 7%</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td class="text-bold">${{ subTax.toFixed(2) }}</td>
+        </tr>
+        <tr>
+            <td class="text-right text-bold">Total</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td class="text-bold">${{ totalPrice.toFixed(2) }}</td>
+        </tr>
+      </table>
+  </div>
+
+    <div class="order-result" [hidden]="formSubmitted && !showFirstName || !showLastName || !showStreetAddress">
+        <h3>
+            <span *ngIf="!items?.length > 0">Processing </span>
+            Order for {{ showFirstName }} {{ showLastName }} at {{ showStreetAddress }}
+            <span *ngIf="items?.length > 0"> has been made</span>.
+        </h3>
+        <p *ngIf="items?.length > 0" class="top-heading">See order summary above.</p>
+    </div>
+</div>
+
+        

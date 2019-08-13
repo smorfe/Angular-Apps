@@ -1,0 +1,31 @@
+<div class="app-currency-detail">
+    <div class="wrapper">
+        <h3>Below is the currency detail.</h3>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td><img src="{{ img }}" class="crypto-img"></td>
+                    <td class="bold">{{ name }}</td>
+                    <td class="bold">{{ symbol }}</td>
+                    <td>{{ price | currency }} USD</td>
+                    <td><app-arrow [arrowSwitch]="arrowChange"></app-arrow></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>Open</td>
+                    <td>{{ open | currency }} USD</td>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>Close</td>
+                    <td>{{ close | currency }} USD</td>
+                    <td>&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
